@@ -3,7 +3,7 @@ local astro = Astro.Type
 
 local isNil = astro.isNil
 
-local function isEmpty(t) 
+local function isEmpty(t)
   
     local next = next(t)      return isNil(next) 
     
@@ -52,9 +52,10 @@ local function std(keys)
 
 end
 
--- Create a table that could have the table functions by default.
+-- Returns a table that could have the table functions by default.
+-- Still need to see if this worth it.
 
-local function table(keys)
+local function create(keys)
 
     local t, meta = {}, { __index = std(keys) }
     
@@ -64,7 +65,7 @@ end
 
 return {
 
-    std = std,                      table = table,
+    std = std,                      create = create,
     isEmpty = isEmpty
 
 }
