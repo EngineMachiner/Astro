@@ -1,20 +1,26 @@
 
-local debug = {}
+local debug = {}        Astro = { Debug = debug }
 
-Astro = { Debug = debug }
+local function subRequire()
 
-return function(path)
+    local path = Astro.Path
 
-    path = path or ''       path = path .. "Astro/"
-
-    for i,v in ipairs { "Type", "Table" } do
+    for i,v in ipairs { "Type", "Table", "Config" } do
     
-        local path = path .. v:lower()
-
-        Astro[v] = require(path)
+        local path = path .. v:lower()          Astro[v] = require(path)
     
     end
 
-    debug.concat = require( path .. "debug/concat" )
+    debug.concat = loadfile( path .. "debug/concat.lua" )
+
+end
+
+return function(path)
+
+    path = path or ''           path = path .. "Astro/"
+
+    Astro.Path = path           subRequire()
+
+    Astro.readOnly = Astro.Table.readOnly           Astro = Astro:readOnly()
 
 end

@@ -1,4 +1,13 @@
 
+
+--[[ 
+
+    It concatenates any arguments including tables and 
+    it has cycle detection and special formatting for readibility
+    using constants like "showID", "showIndex", "wideMode" and "indentation".
+
+]]--
+
 local astro = Astro.Type
 
 local isNumber = astro.isNumber
@@ -8,26 +17,22 @@ local isNil = astro.isNil
 
 astro = Astro.Table
 
-local keys = {
+local table = astro.table {
 
     Astro = { "isEmpty" },        Lua = { "insert", "pack", "concat" }
 
 }
 
-local table = astro.std(keys)
+------------------------------------------------------------------------------------------------------------------------
 
---[[ 
+astro = Astro.Config.Concat
 
-    It concatenates any arguments including tables and 
-    it has cycle detection and special formatting for readibility
-    using the next constants.
+local showID = astro.showID
+local showIndex = astro.showIndex
+local wideMode = astro.wideMode
+local indentation = astro.indentation
 
-]]--
-
-local showID = false -- It shows the table address.
-local showIndex = true -- It uses brackets for table keys and show the keys of array tables.
-local wideMode = true -- It shows more new lines between tables.
-local indentation = '\t' -- It's the value of indentation by default to be used.
+print(#indentation)
 
 local function brackets(s)
 
@@ -240,10 +245,7 @@ local function wrap(...)
     
 end
 
-return function(...)
 
-    local tbl = wrap(...)       tbl = pack(tbl)
+local tbl = wrap(...)       tbl = pack(tbl)
 
-	return table.concat(tbl)
-
-end
+return table.concat(tbl)
