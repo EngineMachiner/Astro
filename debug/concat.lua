@@ -1,8 +1,8 @@
 
 
---[[ 
+--[[
 
-    It concatenates any arguments including tables and 
+    Concatenates any arguments including tables and 
     it has cycle detection and special formatting for readibility
     using constants like "showID", "showIndex", "wideMode" and "indentation".
 

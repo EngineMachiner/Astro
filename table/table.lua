@@ -1,6 +1,6 @@
 --[[
 
-    The std function returns a table with both Lua and Astro table functions.
+    Returns a table with both Lua and Astro table functions.
     It can be used to redefine a local table variable.
 
     Example: {

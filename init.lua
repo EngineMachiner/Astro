@@ -1,5 +1,7 @@
 
-local debug = {}        Astro = { Debug = debug }
+local debug = {}
+
+Astro = { Debug = debug, VersionDate = "20250216" }
 
 local function subRequire()
 
