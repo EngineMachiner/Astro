@@ -1,0 +1,31 @@
+
+name: Astro Build
+
+on: [push, pull_request]
+
+jobs:
+
+  update-info:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Write commit ID
+        run: |
+          sed -i '1i local id = ${{ github.sha }}' build/info.lua
+
+      - name: Install Lua
+        run: |
+          sudo apt update
+          sudo apt install -y lua5.4
+
+      - name: Run Lua script to update information.
+        run: lua build/info.lua
+
+      - name: Push.
+        uses: actions/checkout@v4
+      - run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "Astro information updated."
+          git push

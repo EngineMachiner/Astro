@@ -1,7 +1,13 @@
 
-local debug = {}
+local function info()
 
-Astro = { Debug = debug, VersionDate = "20250216" }
+    local path = Astro.Path             local info = require( path .. "info.lua" )
+    
+    local out = "Astro - Version Date: " .. info.VersionDate .. " - " .. info.ID
+
+    print(out)
+
+end
 
 local function subRequire()
 
@@ -13,9 +19,9 @@ local function subRequire()
     
     end
 
-    debug.concat = loadfile( path .. "debug/concat.lua" )
-
 end
+
+Astro = {}
 
 return function(path)
 

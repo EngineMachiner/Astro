@@ -21,11 +21,16 @@
 
 local function add( tbl, key, subKeys )
 
-    local astro = Astro.Table           local pairs = { Astro = astro, Lua = table }
+    local astro = Astro.Table           local isTable = Astro.Type.isTable
+    
+    local t = { Astro = astro, Lua = table }
+    
 
     if not subKeys then return end
+
+    if not isTable(subKeys) then subKeys = { subKeys } end
     
-    for i,v in ipairs(subKeys) do tbl[v] = pairs[key][v] end
+    for i,v in ipairs(subKeys) do tbl[v] = t[key][v] end
 
 end
 

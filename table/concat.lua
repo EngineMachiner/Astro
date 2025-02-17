@@ -31,8 +31,7 @@ local showID = astro.showID
 local showIndex = astro.showIndex
 local wideMode = astro.wideMode
 local indentation = astro.indentation
-
-print(#indentation)
+local keyQuotes = astro.keyQuotes
 
 local function brackets(s)
 
@@ -52,7 +51,7 @@ local function key(k)
     
     local key = tostring(k)         local quotes = quotes(k)
     
-    if isString(k) then key = quotes end
+    if keyQuotes and isString(k) then key = quotes end
     
     if showIndex then key = brackets(quotes) else
       
