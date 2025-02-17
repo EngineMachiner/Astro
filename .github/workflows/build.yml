@@ -15,7 +15,7 @@ jobs:
       - name: Write commit ID.
         run: |
           shortSHA=$( git rev-parse --short ${{ github.sha }} )
-          sed -i '1i local id = $shortSHA' build/info.lua
+          sed -i '1i local id = ${{shortSHA}}' build/info.lua
 
       - name: Install Lua.
         run: |
