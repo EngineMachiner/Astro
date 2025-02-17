@@ -11,7 +11,9 @@ jobs:
     steps:
       - name: Write commit ID
         run: |
-          sed -i '1i local id = ${{ github.sha }}' build/info.lua
+          path=$GITHUB_WORKSPACE/build/info.lua
+          shortSHA=$( git rev-parse --short ${{ github.sha }} )
+          sed -i '1i local id = $shortSHA' $path
 
       - name: Install Lua
         run: |
@@ -19,7 +21,7 @@ jobs:
           sudo apt install -y lua5.4
 
       - name: Run Lua script to update information.
-        run: lua build/info.lua
+        run: lua $path
 
       - name: Push.
         uses: actions/checkout@v4
