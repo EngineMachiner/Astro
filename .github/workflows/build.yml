@@ -9,22 +9,23 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - name: Write commit ID
+      - name: Checkout the repository first.
+        uses: actions/checkout@v4
+    
+      - name: Write commit ID.
         run: |
-          path=$GITHUB_WORKSPACE/build/info.lua
           shortSHA=$( git rev-parse --short ${{ github.sha }} )
-          sed -i '1i local id = $shortSHA' $path
+          sed -i '1i local id = $shortSHA' build/info.lua
 
-      - name: Install Lua
+      - name: Install Lua.
         run: |
           sudo apt update
           sudo apt install -y lua5.4
 
       - name: Run Lua script to update information.
-        run: lua $path
+        run: lua build/info.lua
 
       - name: Push.
-        uses: actions/checkout@v4
       - run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
