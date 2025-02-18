@@ -1,5 +1,4 @@
-local id = "807e860"
-local id = "eb7dfee"
+-- This comment is a test.
 
 return function(path)
 
