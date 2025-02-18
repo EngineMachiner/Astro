@@ -2,14 +2,13 @@
 
 return function(path)
 
-    path = path or ''           require(path)(path)
+    path = path or './'           require(path)(path)
 
 
     local concat = Astro.Table.concat
     local config = Astro.Config.Concat
 
-    config.showIndex = false
-    config.keyQuotes = false
+    config.showIndex = false            config.keyQuotes = false
 
 
     local file = io.open( path .. "info.lua", 'w' )

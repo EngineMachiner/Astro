@@ -16,7 +16,7 @@ local function subRequire()
     for i,v in ipairs { "Type", "Table", "Config" } do
     
         local path = path .. v:lower()          Astro[v] = require(path)
-    
+
     end
 
     Astro.info = info
@@ -27,7 +27,7 @@ Astro = {}
 
 return function(path)
 
-    Astro.Path = path or ''           subRequire()
+    Astro.Path = path or './'           subRequire()
 
     Astro.readOnly = Astro.Table.readOnly           Astro = Astro:readOnly()
 
