@@ -23,7 +23,9 @@ jobs:
           sudo apt install -y lua5.4
 
       - name: Run Lua script to update information.
-        run: lua dofile $GITHUB_WORKSPACE/build/info.lua $GITHUB_WORKSPACE
+        run: |
+          lua print( $GITHUB_WORKSPACE )
+          lua print( build/info.lua )
 
       - name: Push.
         run: |
