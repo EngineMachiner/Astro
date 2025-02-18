@@ -25,3 +25,10 @@ jobs:
       - name: Run Lua script to update information.
         run: lua -e 'dofile("build/info.lua")()'
 
+      - name: Push.
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .
+          git commit -m "Astro information updated."
+          git push

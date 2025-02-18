@@ -2,9 +2,7 @@
 
 return function(path)
 
-    path = path or ''           local subPath = path .. "Astro/"
-
-    require(subPath)(path)
+    path = path or ''           require(path)(path)
 
 
     local concat = Astro.Table.concat
@@ -14,7 +12,7 @@ return function(path)
     config.keyQuotes = false
 
 
-    local file = io.open( subPath .. "info.lua", 'w' )
+    local file = io.open( path .. "info.lua", 'w' )
 
     local t = { VersionDate = os.date("%Y%m%d"), ID = id }
 

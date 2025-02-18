@@ -27,9 +27,7 @@ Astro = {}
 
 return function(path)
 
-    path = path or ''           path = path .. "Astro/"
-
-    Astro.Path = path           subRequire()
+    Astro.Path = path or ''           subRequire()
 
     Astro.readOnly = Astro.Table.readOnly           Astro = Astro:readOnly()
 
