@@ -2,7 +2,7 @@ local id = "eb7dfee"
 
 return function(path)
 
-    local subPath = path .. "Astro/"
+    path = path or ''           local subPath = path .. "Astro/"
 
     require(subPath)(path)
 

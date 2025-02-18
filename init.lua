@@ -19,6 +19,8 @@ local function subRequire()
     
     end
 
+    Astro.info = info
+
 end
 
 Astro = {}
