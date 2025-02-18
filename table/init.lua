@@ -123,9 +123,13 @@ local tbl = {
 }
 
 
+local paths = { Array = "array",    Copy = "copy" }
+
+local function name(key) return paths[key] or key end
+
 local keys = { "Array", "Copy", "intersect", "table", "create", "readOnly" }
 
-for i,v in ipairs(keys) do tbl[v] = require( path .. v ) end
+for i,v in ipairs(keys) do tbl[v] = require( path .. name(v) ) end
 
 tbl.concat = loadfile( path .. "concat.lua" )
 
