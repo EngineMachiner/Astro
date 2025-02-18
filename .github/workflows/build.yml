@@ -24,6 +24,6 @@ jobs:
 
       - name: Run Lua script to update information.
         run: |
-          lua print( GITHUB_WORKSPACE )
+          lua GITHUB_WORKSPACE
           lua print( build/info.lua )
 
