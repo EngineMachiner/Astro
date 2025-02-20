@@ -31,8 +31,6 @@ return function(path)
 
     Astro = {}          Astro.Path = path or './'           subRequire()
     
-    local table = Astro.Table           concat = concat or table.concat(Astro)
-
-    Astro.readOnly = table.readOnly           Astro = Astro:readOnly()
+    local table = Astro.Table           concat = table.concat(Astro)
 
 end
