@@ -1,5 +1,4 @@
 
-
 --[[
 
     Concatenates any arguments including tables. 
