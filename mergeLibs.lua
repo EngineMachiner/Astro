@@ -22,9 +22,9 @@ return function( input, lib )
         local isValid1 = isNumber(k) and isString(v)
         local isValid2 = isString(k) and isFunction(v)
 
-        local isValid = isValid1 or isValid2
+        local isValid = isValid1 or isValid2            if not isValid then return end
         
-        if not isValid then return end          if isValid1 then k = v  v = lib[v] end
+        if isValid1 then k = v      v = lib[v] end
         
         t[k] = v
 

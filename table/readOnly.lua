@@ -36,13 +36,15 @@ local function readOnly( tbl, recursive )
     onNested()
 
 
-    local t = {}
-
-    local meta = getmetatable(tbl)          meta = isTable(meta) and meta or {}
+    local t, meta = {}, getmetatable(tbl)
     
+    meta = isTable(meta) and meta or {}
+
+
     meta.__index = tbl          meta.__newindex = onWrite
 
     meta.__metatable = "Astro: This table is read-only."
+
 
     return setmetatable( t, meta )
 

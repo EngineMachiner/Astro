@@ -11,9 +11,11 @@ end
 
 local function meta( to, from )
 
-    local meta = action( from, "__meta" )           if meta == false then return end
+    local metatable = getmetatable(from)            if not metatable then return to end
 
-    meta = getmetatable(from)           return setmetatable( to, meta )
+    local meta = action( from, "__meta" )           if meta == false then return to end
+
+    return setmetatable( to, metatable )
 
 end
 
