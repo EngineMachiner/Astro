@@ -1,19 +1,23 @@
 
+local concat
+
 local function info()
 
-    local path = Astro.Path             local info = require( path .. "info.lua" )
+    local path = Astro.Path             local info = require( path .. "info" )
     
     local out = "Astro - Version Date: " .. info.VersionDate .. " - " .. info.ID
 
-    print(out)
+    print( out .. '\n\n' .. concat )
 
 end
+
+local modules = { "Config", "Type", "String", "Table" }
 
 local function subRequire()
 
     local path = Astro.Path
 
-    for i,v in ipairs { "Type", "Table", "Config" } do
+    for i,v in ipairs(modules) do
     
         local path = path .. v:lower()          Astro[v] = require(path)
 
@@ -23,12 +27,12 @@ local function subRequire()
 
 end
 
-Astro = {}
-
 return function(path)
 
-    Astro.Path = path or './'           subRequire()
+    Astro = {}          Astro.Path = path or './'           subRequire()
+    
+    local table = Astro.Table           concat = table.concat(Astro)
 
-    Astro.readOnly = Astro.Table.readOnly           Astro = Astro:readOnly()
+    Astro.readOnly = table.readOnly           Astro = Astro:readOnly()
 
 end

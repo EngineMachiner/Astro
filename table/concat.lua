@@ -2,11 +2,11 @@
 
 --[[
 
-    Concatenates any arguments including tables and 
-    it has cycle detection and special formatting for readibility
+    Concatenates any arguments including tables. 
+    This algorithm has cycle detection and special formatting for readibility
     using constants like "showID", "showIndex", "wideMode" and "indentation".
 
-]]--
+]]
 
 local astro = Astro.Type
 
@@ -18,8 +18,8 @@ local isNil = astro.isNil
 astro = Astro.Table
 
 local table = astro.table {
-
-    Astro = { "isEmpty" },        Lua = { "insert", "pack", "concat" }
+    
+    "insert", "pack", "concat",         isEmpty = astro.isEmpty
 
 }
 
@@ -33,9 +33,11 @@ local wideMode = astro.wideMode
 local indentation = astro.indentation
 local keyQuotes = astro.keyQuotes
 
+local function concat(...) local s = {...}      return table.concat(s) end
+
 local function brackets(s)
 
-    return showIndex and '[' .. s .. ']' or s
+    return showIndex and concat( '[', s ,']' ) or s
 
 end
 
@@ -43,7 +45,7 @@ local function quotes(a)
 
     local s = tostring(a)           local c = #s > 1 and '"' or "'"
 
-    return isString(a) and c .. s .. c or s
+    return isString(a) and concat( c, s, c ) or s
 
 end
 
@@ -83,7 +85,7 @@ local function name(a)
     
     local s = format(a)         local isEmpty = s == ''
     
-    return isEmpty and s or s .. ' '
+    return isEmpty and s or concat( s, ' ' )
 
 end
 
@@ -91,12 +93,11 @@ end
 
 local function copy(tbl)
 
-    local copy = {}         for k,v in pairs(tbl) do copy[k] = v end
-
+    local copy = Astro.Table.Copy.shallow(tbl)
 
     -- Parse indexed nil values to strings. This is why there's a copy.
 
-	for i,v in ipairs(tbl) do if isNil(v) then copy[i] = tostring(nil) end end
+	for i,v in ipairs(tbl) do if isNil(v) then copy[i] = "nil" end end
 
     -- If you need to erase values, you should do it here.
 
@@ -106,13 +107,13 @@ end
 
 local function cycleName(name)
 
-  if not showID then return '' end
-
-  return ' ' .. name:sub( 1, #name - 1 )
+  if not showID then return '' end              name = name:sub( 1, #name - 1 )
+  
+  return concat( ' ', name )
   
 end
 
-local function hasValues(a)
+local function notEmpty(a)
     
     return isTable(a) and not table.isEmpty(a) 
 
@@ -142,9 +143,9 @@ local function pack(tbl)
   
         if wasProcessed(a) or wasProcessed(b) then return end
   
-        local isValid1 = hasValues(a) and not hasValues(b)
-        local isValid2 = hasValues(b) and not hasValues(a)
-        local isValid3 = hasValues(a) and hasValues(b)
+        local isValid1 = notEmpty(a) and not notEmpty(b)
+        local isValid2 = notEmpty(b) and not notEmpty(a)
+        local isValid3 = notEmpty(a) and notEmpty(b)
       
         return isValid1 or isValid2 or isValid3
       
@@ -155,7 +156,7 @@ local function pack(tbl)
         
         indent = indent or 0            indent = indentation:rep(indent)
         
-        table.insert( t, indent .. s )
+        s = concat( indent, s )             table.insert( t, s )
     
     end
 
@@ -179,14 +180,18 @@ local function pack(tbl)
         local isEmpty = table.isEmpty(copy)         local isFormer = tbl == former
         
         
-        local id = tostring(tbl)        local cycleName = "<cycle>" .. cycleName(name)
+        local id = tostring(tbl)        local cycleName = cycleName(name)
+        
+        cycleName = concat( "<cycle>", cycleName )
 
         if processed[id] then add(cycleName) return end
         
         processed[id] = true
         
 
-        if isFormer then indent = indent - 1 else add( name .. '{' ) end
+        local curly = concat( name, '{' )
+
+        if isFormer then indent = indent - 1 else add(curly) end
 
 
         local firstKey, lastKey
@@ -209,14 +214,14 @@ local function pack(tbl)
             if isFirst and not isFormer then add( n, indent ) end
             
 
-            local key = key(k)        if #key > 0 then key = key .. " = " end
+            local key = key(k)        if #key > 0 then key = concat( key, " = " ) end
 
             add( key, indent )        addValue( v, indent )
 
 
             if isLast then if not isFormer then add(n) end else add(",\n") end
               
-            if not isLast and isGap then add("\n") end
+            if not isLast and isGap then add('\n') end
 
         end
 

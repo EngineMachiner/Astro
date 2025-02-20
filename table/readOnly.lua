@@ -38,7 +38,7 @@ local function readOnly( tbl, recursive )
 
     local t = {}
 
-    local meta = getmetatable(tbl) or {}
+    local meta = getmetatable(tbl)          meta = isTable(meta) and meta or {}
     
     meta.__index = tbl          meta.__newindex = onWrite
 

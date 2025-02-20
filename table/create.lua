@@ -3,14 +3,24 @@
     Returns a function to create a table that could 
     have the table functions by default.
 
-    Still need to see if this worth it.
+]]
 
-]]--
+local astro = Astro.Table
 
-return function(keys)
+return function(input)
 
-    local astro = Astro.Table           local meta = { __index = astro.table(keys) }
+    local table = astro.table(input)
+
+    return function(t)
+        
+        local meta = getmetatable(t)
+
+        local __index = meta and meta.__index
     
-    return function(t) return setmetatable( t, meta ) end
+        if __index then astro.merge( __index, table ) else meta = table end
+
+        t = t or {}         return setmetatable( t, meta ) 
+    
+    end
 
 end

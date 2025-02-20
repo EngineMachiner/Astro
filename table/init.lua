@@ -3,12 +3,22 @@
 
 local path = Astro.Path .. "table/"
 
+
 local astro = Astro.Type
 
+local isFunction = astro.isFunction
+local isNumber = astro.isNumber
 local isTable = astro.isTable
 local isNil = astro.isNil
 
-local function merge( from, to )
+
+local internal = require( path .. "internal" )
+
+local action = internal.action
+local meta = internal.meta
+
+
+local function merge( to, from )
 
     for k,v in pairs(from) do to[k] = v end
 
@@ -16,9 +26,11 @@ end
 
 local function keys(tbl)
     
-    local t = {}         for k,v in pairs(tbl) do table.insert( t, k ) end
+    local t = {}
+    
+    for k,v in pairs(tbl) do table.insert( t, k ) end
 
-    return t
+    return meta( t, tbl )
 
 end
 
@@ -26,7 +38,7 @@ local function values(tbl)
     
     local t = {}       for k,v in pairs(tbl) do table.insert( t, v ) end
 
-    return t
+    return meta( t, tbl )
 
 end
 
@@ -57,27 +69,60 @@ local function find( tbl, x )
     
 end
 
--- Returns filtered values using a function with the key as argument.
+--[[
+
+    Returns filtered values using a function with the key as argument.
+
+    It can return an ordered array values setting __orderArray to true 
+    in the table and then calling the function. When the function is run
+    it will remove the value.
+
+]]
 
 local function filter( tbl, x )
 
+    local orderArray = action( tbl, "__orderArray" )
+    
     local isValid = isValid( tbl, x )           local t = {}
 
-    for k,v in pairs(tbl) do if isValid(k) then t[k] = v end end
+    local function add(k)
 
-    return t
+        if not isValid(k) then return end           local v = tbl[k]
+
+        if orderArray and isNumber(k) then table.insert(t, v) return end
+        
+        t[k] = v
+
+    end
+
+    for k,v in pairs(tbl) do add(k) end
+
+    return meta( t, tbl )
 
 end
+
+--[[
+
+    Returns a table with the first table values without the same 
+    key-values of the other table.
+
+]]
 
 local function sub( a, b )
 
     local function isValid(key)
     
-        local val, inBoth = a[key]
+        local val = a[key]          
 
-        for k,v in pairs(b) do if val == v then inBoth = true end end
+        for k,v in pairs(b) do
+            
+            local isValid = key == k and val == v
+
+            if isValid then return false end
+        
+        end
     
-        return not inBoth
+        return true
 
     end
 
@@ -93,15 +138,7 @@ local function minus( tbl, val )
 
     for k,v in pairs(tbl) do if k ~= key then t[k] = v end end
 
-    return t
-
-end
-
--- Returns a table minus all the found values.
-
-local function minusAll( tbl, val )
-
-    return filter( tbl, function(k) return tbl[k] ~= val end )
+    return meta( t, tbl )
 
 end
 
@@ -116,22 +153,36 @@ local tbl = {
     
     merge = merge,          keys = keys,        values = values,
 
-    random = random,        find = find,        filter = filter,        
+    random = random,        find = find,        filter = filter,        sub = sub,
     
-    minus = minus,      minusAll = minusAll,        isEmpty = isEmpty
+    minus = minus,      minusAll = minusAll,        isEmpty = isEmpty,
+
+    table = function(input)
+        
+        return require("mergeLibs")( input, table )
+    
+    end
 
 }
+
+Astro.Table = tbl -- Store temporarily first.
+
+-- We're removing the internal table later.
+
+Astro.Table.Internal = internal
 
 
 local paths = { Array = "array",    Copy = "copy" }
 
 local function name(key) return paths[key] or key end
 
-local keys = { "Array", "Copy", "intersect", "table", "create", "readOnly" }
+local keys = { "Array", "Copy", "intersect", "readOnly", "create" }
 
 for i,v in ipairs(keys) do tbl[v] = require( path .. name(v) ) end
 
 tbl.concat = loadfile( path .. "concat.lua" )
+
+Astro.Table.Internal = nil
 
 
 return tbl
