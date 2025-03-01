@@ -64,9 +64,25 @@ local function key(k)
 
 end
 
+local sequences = {
+
+    ['\a'] = '\\a',     ['\b'] = '\\b',     ['\f'] = '\\f',
+    ['\n'] = '\\n',     ['\r'] = '\\r',     ['\t'] = '\\t',
+    ['\v'] = '\\v'
+
+}
+
+local function escape(a)
+
+    for k,v in pairs(sequences) do a = a:gsub( k, v ) end
+
+    return a
+
+end
+
 local function format(a)
 
-    local s = tostring(a)
+    local s = tostring(a)       s = escape(s)
 
     if isString(a) then return quotes(s) end
 

@@ -3,24 +3,20 @@
     Returns a function to create a table that could 
     have the table functions by default.
 
+    Be aware that it overrides the __index metamethod.
+
 ]]
 
-local astro = Astro.Table
+local astro = Astro.Table.Meta
 
 return function(input)
 
-    local table = astro.table(input)
-
     return function(t)
         
-        local meta = getmetatable(t)
-
-        local __index = meta and meta.__index
-    
-        if __index then astro.merge( __index, table ) else meta = table end
-
-        t = t or {}         return setmetatable( t, meta ) 
+        t = t or {}         local table = astro.table(input)
+        
+        return meta.setIndex( t, table )
     
     end
-
+    
 end

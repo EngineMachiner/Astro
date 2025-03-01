@@ -20,7 +20,7 @@ local meta = internal.meta
 
 local function merge( to, from )
 
-    for k,v in pairs(from) do to[k] = v end
+    for k,v in pairs(from) do to[k] = v end         return to
 
 end
 
@@ -149,6 +149,8 @@ local function isEmpty(t)
 end
 
 
+local mergeLibs = require( Astro.Path .. "mergeLibs" )
+
 local tbl = {
     
     merge = merge,          keys = keys,        values = values,
@@ -157,11 +159,7 @@ local tbl = {
     
     minus = minus,      minusAll = minusAll,        isEmpty = isEmpty,
 
-    table = function(input)
-        
-        return require("mergeLibs")( input, table )
-    
-    end
+    table = function(input) return mergeLibs( input, table ) end
 
 }
 
@@ -172,11 +170,11 @@ Astro.Table = tbl -- Store temporarily first.
 Astro.Table.Internal = internal
 
 
-local paths = { Array = "array",    Copy = "copy" }
+local paths = { Array = "array",    Copy = "copy",      Meta = "meta" }
 
 local function name(key) return paths[key] or key end
 
-local keys = { "Array", "Copy", "intersect", "readOnly", "create" }
+local keys = { "Array", "Copy", "Meta", "intersect", "readOnly", "create" }
 
 for i,v in ipairs(keys) do tbl[v] = require( path .. name(v) ) end
 

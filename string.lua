@@ -13,9 +13,11 @@ local function isBlank(s)
 
 end
 
-local function startsWith( s1, s2 ) return s2:match( '^' .. s1 ) end
+local function startsWith( s1, s2 ) return s1:match( '^' .. s2 ) end
 
-local function endsWith( s1, s2 ) return s2:match( s1 .. '$' ) end
+local function endsWith( s1, s2 ) return s1:match( s2 .. '$' ) end
+
+local mergeLibs = require( Astro.Path .. "mergeLibs" )
 
 return {
 
@@ -25,10 +27,6 @@ return {
 
     startsWith = startsWith,            endsWith = endsWith,
 
-    string = function(input)
-        
-        return require("mergeLibs")( input, string )
-    
-    end
+    string = function(input) return mergeLibs( input, string ) end
 
 }

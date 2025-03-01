@@ -1,4 +1,6 @@
 
+local isTable = Astro.Type.isTable
+
 -- Get and remove action.
 
 local function action( tbl, key )
@@ -11,7 +13,7 @@ end
 
 local function meta( to, from )
 
-    local metatable = getmetatable(from)            if not metatable then return to end
+    local metatable = getmetatable(from)            if not isTable(metatable) then return to end
 
     local meta = action( from, "__meta" )           if meta == false then return to end
 
