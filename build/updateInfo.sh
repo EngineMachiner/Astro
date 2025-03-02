@@ -1,6 +1,6 @@
 #!/bin/bash
 
-date=$( git log -1 --format="%ad" --date=format:"%Y%m%d" )
+date=$( date +'%Y%m%d' )
 commit=$( git log -1 --format="%h" )
 
 # Write the Lua script to a file
