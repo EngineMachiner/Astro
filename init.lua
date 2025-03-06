@@ -11,7 +11,12 @@ local function info()
 
 end
 
-local modules = { "Config", "Type", "String", "Table" }
+
+local paths = { Vector = true }
+
+local function name(key) return paths[key] and key or key:lower() end
+
+local modules = { "Config", "Type", "String", "Table", "Vector" }
 
 local function subRequire()
 
@@ -19,13 +24,14 @@ local function subRequire()
 
     for i,v in ipairs(modules) do
     
-        local path = path .. v:lower()          Astro[v] = require(path)
+        local path = path .. name(v)          Astro[v] = require(path)
 
     end
 
     Astro.info = info
 
 end
+
 
 return function(path)
 
