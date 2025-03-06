@@ -12,6 +12,8 @@ local function info()
 end
 
 
+-- This is the main module loader.
+
 local paths = { Vector = true }
 
 local function name(key) return paths[key] and key or key:lower() end
