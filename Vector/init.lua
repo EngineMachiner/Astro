@@ -141,6 +141,10 @@ local function builder( __index )
 
 end
 
+
 local t = { isVector = isVector, builder = builder }        astro.merge( vector, t )
 
-return vector
+
+local meta = { __call = builder() } -- tapLua.Vector metatable.
+
+return setmetatable( vector, meta )
