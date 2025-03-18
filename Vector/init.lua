@@ -56,6 +56,14 @@ end
 
 local function __div( a, b ) return __mul( a, 1 / b )  end
 
+local function __mod( a, b )
+
+    local c = copy(a)       for k,v in pairs(coords) do c[v] = a[v] % b end
+
+    return c
+
+end
+
 local function __unm(a)
 
     local c = copy(a)       for k,v in pairs(coords) do c[v] = - a[v] end
@@ -96,7 +104,7 @@ end
 
 local Meta = { 
     
-    __add = __add,      __sub = __sub,      __mul = __mul,	__div = __div,
+    __add = __add,      __sub = __sub,      __mul = __mul,	__div = __div,  __mod = __mod,
 
     __unm = __unm,      __eq = __eq,        __tostring = __tostring
 
