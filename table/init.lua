@@ -20,11 +20,13 @@ local meta = internal.meta
 
 local function pair( k, v ) return { key = k, value = v } end
 
-local function merge( new, current )
+local function value( new, current )
 
-    if not isTable(new) then return new end             current = current or {}
+    local isVector = Astro.Vector.isVector              if not isTable(new) then return new end
 
-    for k,v in pairs(new) do current[k] = merge( v, current[k] ) end
+    if isVector(new) then return new:copy() end         current = current or {}
+    
+    for k,v in pairs(new) do current[k] = value( v, current[k] ) end
 
     return current
 
@@ -32,7 +34,7 @@ end
 
 local function deepMerge( to, from )
 
-    for k,v in pairs(from) do to[k] = merge( v, to[k] ) end         return to
+    for k,v in pairs(from) do to[k] = value( v, to[k] ) end         return to
 
 end
 
