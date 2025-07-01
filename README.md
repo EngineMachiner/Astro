@@ -25,6 +25,10 @@ The table library attempts to preserve the original metatable and metamethods fr
 
 **Astro** looks forward to extend the standard Lua library with a wide range of utilities to keep the code **simple and readable**.
 
+## Usage
+
+Astro can be used loaded as a module through `require()` or by loading the `init.lua` file in the Lua environment.
+
 ## Contributing
 
 - Run `./build/updateInfo.sh` to update the version in `info.lua`.
