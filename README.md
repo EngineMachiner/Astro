@@ -8,10 +8,7 @@
 
 - Table concatenation with format support and cycle detection.
 
-- String manipulation:
-    - Character substring extraction.
-    - Blank or empty strings checks.
-    - Check if ends or starts with another sequence.
+- A simple vector implementation.
 
 - Table manipulation:
     - Operations such as addition, substraction, merging and reversing, etc.
@@ -20,6 +17,11 @@
     - Function to make a table read-only.
 
 The table library attempts to preserve the original metatable and metamethods from the input table.
+
+- String manipulation:
+    - Character substring extraction.
+    - Blank or empty strings checks.
+    - Check if ends or starts with another sequence.
 
 **Astro** looks forward to extend the standard Lua library with a wide range of utilities to keep the code **simple and readable**.
 
