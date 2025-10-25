@@ -1,5 +1,7 @@
 
-local safeDivision = Astro.Math.safeDivision
+local astro = Astro.Math
+
+local safeDivision = astro.safeDivision;        local safeModulo = astro.safeModulo
 
 
 local astro = Astro.Type        local isTable = astro.isTable        local isNumber = astro.isNumber
