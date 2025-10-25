@@ -1,4 +1,7 @@
 
+local safeDivision = Astro.Math.safeDivision
+
+
 local astro = Astro.Type        local isTable = astro.isTable        local isNumber = astro.isNumber
 
 astro = Astro.Table
@@ -14,7 +17,7 @@ local metaVector = astro.Copy.deep(vector)
 local mergeLibs = require( Astro.Path .. "mergeLibs" )
 
 
-local function hasCoordinate(a)
+local function hasAnyComponent(a)
 
     for i,v in ipairs(spaceAxes) do if a[v] then return true end end
 
@@ -27,7 +30,7 @@ end
 
 local function array(a)
 
-    if hasCoordinate(a) then return a end
+    if hasAnyComponent(a) then return a end
 
     for k,v in pairs(spaceAxes) do a[v] = a[k]     a[k] = nil end
 
@@ -65,18 +68,42 @@ end
 local function __mul( a, b ) return isNumber(a) and mul( b, a ) or mul( a, b ) end
 
 
-local function __div( a, b ) return isNumber(a) and mul( b, 1 / a ) or mul( a, 1 / b ) end
+local function div1( a, b )
 
-
-local function mod( a, b )
-
-    local c = copy(a)       for i,v in pairs(spaceAxes) do c[v] = a[v] % b end
+    local c = copy(b)       for i,v in ipairs(spaceAxes) do c[v] = safeDivision( a, c[v] ) end
 
     return c
 
 end
 
-local function __mod( a, b ) return isNumber(a) and mod( b, a ) or mod( a, b ) end
+local function div2( a, b )
+
+    local c = copy(a)       for i,v in ipairs(spaceAxes) do c[v] = safeDivision( c[v], b ) end
+
+    return c
+
+end
+
+local function __div( a, b ) return isNumber(a) and div1( a, b ) or div2( a, b ) end
+
+
+local function mod1( a, b )
+
+    local c = copy(b)       for i,v in pairs(spaceAxes) do c[v] = safeModulo( a, c[v] ) end
+
+    return c
+
+end
+
+local function mod2( a, b )
+
+    local c = copy(a)       for i,v in pairs(spaceAxes) do c[v] = safeModulo( c[v], b ) end
+
+    return c
+
+end
+
+local function __mod( a, b ) return isNumber(a) and mod1( a, b ) or mod2( a, b ) end
 
 
 local function __unm(a)
@@ -99,9 +126,11 @@ local function __tostring(a)
 
     local s = { a:unpack() }        s = table.concat( s, ", " )
 
-    return table.concat { "Vector( ", s, " )" }
+    return table.concat { "Vector", "( ", s, " )" }
 
 end
+
+metaVector.tostring = __tostring
 
 
 local Meta = { 
@@ -115,14 +144,18 @@ local Meta = {
 
 local function isVector(a)
 
-    if not isTable(a) then return false end             local meta = getmetatable(a)
+    if not isTable(a) then return false end
     
-    if not meta then return false end           return meta.__tostring == __tostring
+    local meta = getmetatable(a);       if not meta then return false end
+
+    for k,v in pairs(Meta) do if meta[k] ~= v then return false end end
+
+    return true
 
 end
 
 
-local defaults = { "unpack", "copy" }
+local defaults = { "unpack", "copy", "tostring" }
 
 local function builder( __index )
 
@@ -133,7 +166,7 @@ local function builder( __index )
     __index = mergeLibs( __index, metaVector )
     
 
-    -- Set the vector position defaults.
+    -- Set the vector components defaults.
 
     for i,v in ipairs(spaceAxes) do __index[v] = __index[v] or 0 end
 

@@ -1,8 +1,7 @@
 
-local astro = Astro.Table
+local astro = Astro.Table;              local safeDivision = Astro.Math.safeDivision
 
-
-local planeAxes = { 'x', 'y' }         local spaceAxes = { 'x', 'y', 'z' }
+local planeAxes = { 'x', 'y' }          local spaceAxes = { 'x', 'y', 'z' }
 
 local function normSqr(a)
 
@@ -26,29 +25,11 @@ local function copy(a)
 
 end
 
-local function unit(a)
-    
-    local norm = norm(a)
-
-	for i,v in ipairs(spaceAxes) do
-        
-        local k = v         v = a[v]
-        
-        if v and v ~= 0 then a[k] = v / norm end 
-    
-    end
-
-	return a
-
-end
+local function unit(a) return a / norm(a) end
 
 local function isZero(a)
 
-    for i,v in ipairs(spaceAxes) do 
-        
-        if a[v] ~= 0 then return false end 
-    
-    end
+    for i,v in ipairs(spaceAxes) do if a[v] ~= 0 then return false end end
 
     return true
 
@@ -70,10 +51,29 @@ local function angle(a)
 
 end
 
+-- Returns component / Hadamard / element-wise / product and division between vectors.
+
+local function componentProduct( a, b )
+
+    local c = copy(a);          for i,v in ipairs(spaceAxes) do c[v] = c[v] * b[v] end
+
+    return c
+
+end
+
+local function componentDivision( a, b )
+    
+    local c = copy(a);          for i,v in ipairs(spaceAxes) do c[v] = safeDivision( c[v], b[v] ) end
+
+    return c
+
+end
 
 return {
 
     planeAxes = planeAxes,          spaceAxes = spaceAxes,
+
+    componentProduct = componentProduct,          componentDivision = componentDivision,
 
     normSqr = normSqr,          norm = norm,            unit = unit,            isZero = isZero,
     angle = angle,              unpack = unpack,        copy = copy
