@@ -106,7 +106,7 @@ end
 
 local function cycleName(name)
 
-  if not showID then return '' end          name = name:sub( 1, #name - 1 )         return concat( ' ', name )
+    if not showID then return '' end          name = name:sub( 1, #name - 1 )         return concat( ' ', name )
   
 end
 
