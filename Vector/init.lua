@@ -1,7 +1,7 @@
 
 local astro = Astro.Math
 
-local safeDivision = astro.safeDivision;        local safeModulo = astro.safeModulo
+local safeDivision = astro.safeDivision         local safeModulo = astro.safeModulo
 
 
 local astro = Astro.Type        local isTable = astro.isTable        local isNumber = astro.isNumber
@@ -21,9 +21,7 @@ local mergeLibs = require( Astro.Path .. "mergeLibs" )
 
 local function hasAnyComponent(a)
 
-    for i,v in ipairs(spaceAxes) do if a[v] then return true end end
-
-    return false
+    for i,v in ipairs(spaceAxes) do if a[v] then return true end end            return false
 
 end
 
@@ -34,26 +32,24 @@ local function array(a)
 
     if hasAnyComponent(a) then return a end
 
-    for k,v in pairs(spaceAxes) do a[v] = a[k]     a[k] = nil end
-
-	return a
+    for k,v in pairs(spaceAxes) do a[v] = a[k]     a[k] = nil end           return a
 
 end
 
 
 local function __add( a, b )
 
-    local c = copy(a)       for i,v in ipairs(spaceAxes) do c[v] = a[v] + b[v] end
-
-    return c
+    local c = copy(a)
+    
+    for i,v in ipairs(spaceAxes) do c[v] = a[v] + b[v] end          return c
 
 end
 
 local function __sub( a, b )
 
-    local c = copy(a)       for i,v in ipairs(spaceAxes) do c[v] = a[v] - b[v] end
-
-    return c
+    local c = copy(a)
+    
+    for i,v in ipairs(spaceAxes) do c[v] = a[v] - b[v] end          return c
 
 end
 
@@ -61,9 +57,9 @@ end
 
 local function mul( a, b )
 
-    local c = copy(a)       for i,v in ipairs(spaceAxes) do c[v] = a[v] * b end
-
-    return c
+    local c = copy(a)       
+    
+    for i,v in ipairs(spaceAxes) do c[v] = a[v] * b end         return c
 
 end
 
@@ -72,17 +68,17 @@ local function __mul( a, b ) return isNumber(a) and mul( b, a ) or mul( a, b ) e
 
 local function div1( a, b )
 
-    local c = copy(b)       for i,v in ipairs(spaceAxes) do c[v] = safeDivision( a, c[v] ) end
-
-    return c
+    local c = copy(b)
+    
+    for i,v in ipairs(spaceAxes) do c[v] = safeDivision( a, c[v] ) end          return c
 
 end
 
 local function div2( a, b )
 
-    local c = copy(a)       for i,v in ipairs(spaceAxes) do c[v] = safeDivision( c[v], b ) end
-
-    return c
+    local c = copy(a)
+    
+    for i,v in ipairs(spaceAxes) do c[v] = safeDivision( c[v], b ) end          return c
 
 end
 
@@ -91,17 +87,17 @@ local function __div( a, b ) return isNumber(a) and div1( a, b ) or div2( a, b )
 
 local function mod1( a, b )
 
-    local c = copy(b)       for i,v in pairs(spaceAxes) do c[v] = safeModulo( a, c[v] ) end
-
-    return c
+    local c = copy(b)
+    
+    for i,v in pairs(spaceAxes) do c[v] = safeModulo( a, c[v] ) end         return c
 
 end
 
 local function mod2( a, b )
 
-    local c = copy(a)       for i,v in pairs(spaceAxes) do c[v] = safeModulo( c[v], b ) end
-
-    return c
+    local c = copy(a)
+    
+    for i,v in pairs(spaceAxes) do c[v] = safeModulo( c[v], b ) end         return c
 
 end
 
@@ -110,15 +106,15 @@ local function __mod( a, b ) return isNumber(a) and mod1( a, b ) or mod2( a, b )
 
 local function __unm(a)
 
-    local c = copy(a)       for i,v in ipairs(spaceAxes) do c[v] = - a[v] end
-
-    return c
+    local c = copy(a)
+    
+    for i,v in ipairs(spaceAxes) do c[v] = - a[v] end           return c
 
 end
 
 local function __eq( a, b )
 
-    for i,v in ipairs(spaceAxes) do    if a[v] ~= b[v] then return false end    end
+    for i,v in ipairs(spaceAxes) do if a[v] ~= b[v] then return false end end
 
     return true
 
@@ -137,7 +133,7 @@ metaVector.tostring = __tostring
 
 local Meta = { 
     
-    __add = __add,      __sub = __sub,      __mul = __mul,	__div = __div,  __mod = __mod,
+    __add = __add,      __sub = __sub,      __mul = __mul,      __div = __div,      __mod = __mod,
 
     __unm = __unm,      __eq = __eq,        __tostring = __tostring
 
@@ -148,11 +144,9 @@ local function isVector(a)
 
     if not isTable(a) then return false end
     
-    local meta = getmetatable(a);       if not meta then return false end
+    local meta = getmetatable(a)        if not meta then return false end
 
-    for k,v in pairs(Meta) do if meta[k] ~= v then return false end end
-
-    return true
+    for k,v in pairs(Meta) do if meta[k] ~= v then return false end end         return true
 
 end
 
@@ -189,7 +183,7 @@ local function builder( __index )
 
         vector = array(vector)          astro.Meta.setIndex( vector, __index )
 
-        local meta = getmetatable(vector)       Astro.Table.merge( meta, Meta )
+        local meta = getmetatable(vector)           Astro.Table.merge( meta, Meta )
 
         return vector
     

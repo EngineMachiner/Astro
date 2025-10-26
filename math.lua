@@ -7,7 +7,7 @@ local function nextPowerOfTwo(n) -- For Lua 5.1.
 
     if n <= 1 then return 1 end -- Edge cases: 0 and 1
 
-    local p = 1;            while p < n do p = p * 2 end;           return p
+    local p = 1             while p < n do p = p * 2 end            return p
 
 end
 
