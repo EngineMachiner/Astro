@@ -122,9 +122,9 @@ end
 
 local function __tostring(a)
 
-    local s = { a:unpack() }        s = table.concat( s, ", " )
-
-    return table.concat { "Vector", "( ", s, " )" }
+    local s = { a:unpack() }        if s[3] == 0 then s[3] = nil end -- 2D formatting.
+    
+    s = table.concat( s, ", " )         return table.concat { "Vector", "( ", s, " )" }
 
 end
 
