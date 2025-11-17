@@ -37,9 +37,9 @@ local function angle(a)
 
     local vector = copy(a)                  vector = unit(vector)
     
-    local x, y = unpack(vector)             local angle = safeDivision( y, x )
+    local x, y = unpack(vector)             local angle = math.atan( y / x )
     
-    angle = math.atan(angle)                angle = math.deg(angle)                 return angle % 360
+    angle = math.deg(angle)                 return angle % 360
 
 end
 
