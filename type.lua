@@ -1,36 +1,37 @@
+---@param a any
+---@return boolean
+local function isBoolean(a) end
 
 ---@param a any
 ---@return boolean
-local function isBoolean(a) return type(a) == "boolean" end
+local function isNumber(a) end
 
 ---@param a any
 ---@return boolean
-local function isNumber(a) return type(a) == "number" end
+local function isString(a) end
 
 ---@param a any
 ---@return boolean
-local function isString(a) return type(a) == "string" end
+local function isFunction(a) end
 
 ---@param a any
 ---@return boolean
-local function isFunction(a) return type(a) == "function" end
+local function isTable(a) end
 
 ---@param a any
 ---@return boolean
-local function isTable(a) return type(a) == "table" end
+local function isUserData(a) end
 
 ---@param a any
 ---@return boolean
-local function isUserData(a) return type(a) == "userdata" end
-
----@param a any
----@return boolean
-local function isNil(a) return a == nil end
+local function isNil(a) end
 
 return {
-
-    isBoolean = isBoolean,              isNumber = isNumber,            isString = isString,
-    isFunction = isFunction,            isTable = isTable,              isUserData = isUserData,
-    isNil = isNil
-
+    isBoolean = isBoolean,
+    isNumber = isNumber,
+    isString = isString,
+    isFunction = isFunction,
+    isTable = isTable,
+    isUserData = isUserData,
+    isNil = isNil,
 }

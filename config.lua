@@ -1,16 +1,11 @@
-
 ---@class AstroConfig
 ---@field Concat { showID:boolean, showIndex:boolean, wideMode:boolean, indentation:string, keyQuotes:boolean }
 return {
-
     Concat = {
-
-        showID = false, -- It shows the table address.
-        showIndex = true, -- It uses brackets for table keys and show the keys of array tables.
-        wideMode = true, -- It shows more new lines between tables.
-        indentation = '\t', -- It's the value of indentation by default to be used.        
-        keyQuotes = true
-
+        showID = false,
+        showIndex = true,
+        wideMode = true,
+        indentation = '	',
+        keyQuotes = true,
     }
-    
 }

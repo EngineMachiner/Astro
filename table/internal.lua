@@ -1,20 +1,7 @@
-
-local isTable = Astro.Type.isTable
-
--- Keep the next table with the former metatable.
-
 ---@param to table
 ---@param from table
 ---@param meta boolean?
 ---@return table
-local function meta( to, from, meta )
-
-    meta = meta == nil and true
-
-    local metatable = getmetatable(from)            if not isTable(metatable) then return to end
-
-    if meta == false then return to end             return setmetatable( to, metatable )
-
-end
+local function meta(to, from, meta) end
 
 return { meta = meta }
