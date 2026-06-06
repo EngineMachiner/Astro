@@ -11,6 +11,9 @@ local astro = Astro.Type        local isString = astro.isString         local is
 
 local isFunction = astro.isFunction
 
+---@param input table
+---@param lib table
+---@return table
 return function( input, lib )
 
     local t = {}

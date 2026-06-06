@@ -11,6 +11,8 @@
 
 local astro = Astro.Table.Meta
 
+---@param input table
+---@return fun(table?:table): table
 return function(input)
 
     return function(t)

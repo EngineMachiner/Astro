@@ -1,4 +1,7 @@
 
+---@class AstroInfo
+---@field VersionDate string
+---@field ID string
 return {
 
     VersionDate = "20260307",

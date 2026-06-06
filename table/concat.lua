@@ -1,4 +1,6 @@
 
+---@vararg any
+---@return string
 --[[
 
     Concatenates any arguments including tables. 

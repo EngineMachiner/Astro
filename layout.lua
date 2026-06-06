@@ -14,10 +14,15 @@ end
 
 -- I'm not liking this vector value conversion when it's a number. :(
 
+---@param x number|table
+---@return number|table
 local function value(x) return isNumber(x) and Vector(x) or x end
 
 -- Returns the vector of elements that fits within a length depending on the size.
 
+---@param x number|table
+---@param size number|table
+---@return number|table
 local function quantityIn( x, size )
 
     local isNumber = isNumber(x) and isNumber(size)         x = value(x)        size = value(size)
@@ -29,6 +34,8 @@ end
 
 -- Returns the sum of the offsets needed to center elements based on the vector quantityIn.
 
+---@param quantityIn number|table
+---@return number|table
 local function centerOffset( quantityIn )
 
     local n = quantityIn            local isNumber = isNumber(n)        n = value(n)

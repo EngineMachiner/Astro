@@ -11,8 +11,14 @@ local path = Astro.Path .. "table/"         local internal = require( path .. "i
 local meta = internal.meta
 
 
+---@param k any
+---@param v any
+---@return { key:any, value:any }
 local function pair( k, v ) return { key = k, value = v } end
 
+---@param new any
+---@param current any
+---@return any
 local function value( new, current )
 
     local isVector = Astro.Vector.isVector
@@ -27,36 +33,51 @@ local function value( new, current )
 
 end
 
+---@param to table
+---@param from table
+---@return table
 local function deepMerge( to, from )
 
     for k,v in pairs(from) do to[k] = value( v, to[k] ) end         return to
 
 end
 
+---@param to table
+---@param from table
+---@return table
 local function merge( to, from )
 
     for k,v in pairs(from) do to[k] = v end         return to
 
 end
 
+---@param tbl table
+---@return table
 local function keys(tbl)
     
     local t = {}        for k,v in pairs(tbl) do table.insert( t, k ) end          return meta( t, tbl )
 
 end
 
+---@param tbl table
+---@return table
 local function values(tbl)
     
     local t = {}        for k,v in pairs(tbl) do table.insert( t, v ) end          return meta( t, tbl )
 
 end
 
+---@param tbl table
+---@return any
 local function random(tbl)
     
     local values = values(tbl)          local i = math.random( #values )            return values[i]
 
 end
 
+---@param tbl table
+---@param x any
+---@return fun(k:any,v:any): boolean
 local function isValid( tbl, x )
 
     local default = function( k, v ) return v == x end          return isFunction(x) and x or default
@@ -66,6 +87,9 @@ end
 -- Returns a pair with the key and value if the value is found.
 -- The x parameter can be the function to compare or the value to search.
 
+---@param tbl table
+---@param x any
+---@return table
 local function find( tbl, x )
 
     local isValid = isValid( tbl, x )
@@ -74,6 +98,9 @@ local function find( tbl, x )
     
 end
 
+---@param tbl table
+---@param x any
+---@return boolean
 local function contains( tbl, x )
     
     return find( tbl, x ).value and true
@@ -82,6 +109,9 @@ end
 
 -- Returns filtered values using a function with the key as argument.
 
+---@param tbl table
+---@param x any
+---@return table
 local function filter( tbl, x )
 
     local isValid = isValid( tbl, x )           local t = {}
@@ -125,6 +155,9 @@ end
 
 -- Returns a table minus the value first found.
 
+---@param tbl table
+---@param val any
+---@return table
 local function minus( tbl, val )
 
     local t = {}        local key = find( tbl, val ).key
@@ -133,6 +166,8 @@ local function minus( tbl, val )
 
 end
 
+---@param t table
+---@return boolean
 local function isEmpty(t) local next = next(t)      return next == nil end
 
 

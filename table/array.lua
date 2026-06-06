@@ -4,8 +4,13 @@ local isTable = Astro.Type.isTable
 local astro = Astro.Table           local meta = astro.Internal.meta
 
 
+---@param tbl table
+---@return any
 local function last(tbl) return tbl[#tbl] end
 
+---@param to table
+---@param from table
+---@return nil
 local function add( to, from )
 
     for k,v in ipairs(from) do table.insert( to, v ) end
@@ -15,6 +20,9 @@ end
 
 -- Returns a table with the first table values without the values of the other table.
 
+---@param a table
+---@param b table
+---@return table
 local function sub( a, b )
 
     local function isValid(key)
@@ -29,6 +37,8 @@ local function sub( a, b )
 
 end
 
+---@param t table
+---@return table
 local function reverse(t)
 
     local output = {}           for i = #t, 1, -1 do table.insert( output, t[i] ) end
@@ -41,6 +51,9 @@ end
 
 -- It's better to be aware on how you're adding things to the array instead.
 
+---@param array table
+---@param recursive boolean?
+---@return table
 local function distinct( array, recursive )
 
     local processed, output = {}, {}

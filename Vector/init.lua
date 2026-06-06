@@ -28,6 +28,8 @@ end
 
 -- Array to a very basic vector.
 
+---@param a table
+---@return table
 local function array(a)
 
     if hasAnyComponent(a) then return a end
@@ -36,7 +38,9 @@ local function array(a)
 
 end
 
-
+---@param a table
+---@param b table
+---@return table
 local function __add( a, b )
 
     local c = copy(a)
@@ -45,6 +49,9 @@ local function __add( a, b )
 
 end
 
+---@param a table
+---@param b table
+---@return table
 local function __sub( a, b )
 
     local c = copy(a)
@@ -55,6 +62,9 @@ end
 
 -- Scalar multiplication and division.
 
+---@param a table
+---@param b number
+---@return table
 local function mul( a, b )
 
     local c = copy(a)       
@@ -63,9 +73,15 @@ local function mul( a, b )
 
 end
 
+---@param a table|number
+---@param b table|number
+---@return table
 local function __mul( a, b ) return isNumber(a) and mul( b, a ) or mul( a, b ) end
 
 
+---@param a number
+---@param b table
+---@return table
 local function div1( a, b )
 
     local c = copy(b)
@@ -74,6 +90,9 @@ local function div1( a, b )
 
 end
 
+---@param a table
+---@param b number
+---@return table
 local function div2( a, b )
 
     local c = copy(a)
@@ -82,9 +101,15 @@ local function div2( a, b )
 
 end
 
+---@param a table|number
+---@param b table|number
+---@return table
 local function __div( a, b ) return isNumber(a) and div1( a, b ) or div2( a, b ) end
 
 
+---@param a number
+---@param b table
+---@return table
 local function mod1( a, b )
 
     local c = copy(b)
@@ -93,6 +118,9 @@ local function mod1( a, b )
 
 end
 
+---@param a table
+---@param b number
+---@return table
 local function mod2( a, b )
 
     local c = copy(a)
@@ -101,9 +129,14 @@ local function mod2( a, b )
 
 end
 
+---@param a table|number
+---@param b table|number
+---@return table
 local function __mod( a, b ) return isNumber(a) and mod1( a, b ) or mod2( a, b ) end
 
 
+---@param a table
+---@return table
 local function __unm(a)
 
     local c = copy(a)
@@ -112,6 +145,9 @@ local function __unm(a)
 
 end
 
+---@param a table
+---@param b table
+---@return boolean
 local function __eq( a, b )
 
     for i,v in ipairs(spaceAxes) do if a[v] ~= b[v] then return false end end
@@ -120,6 +156,8 @@ local function __eq( a, b )
 
 end
 
+---@param a table
+---@return string
 local function __tostring(a)
 
     local s = { a:unpack() }        if s[3] == 0 then s[3] = nil end -- 2D formatting.
@@ -140,6 +178,8 @@ local Meta = {
 }
 
 
+---@param a any
+---@return boolean
 local function isVector(a)
 
     if not isTable(a) then return false end
@@ -153,6 +193,8 @@ end
 
 local defaults = { "unpack", "copy", "tostring" }
 
+---@param __index table?
+---@return fun(...:any): table
 local function builder( __index )
 
     -- Add default functions and look up functions names using mergeLibs.

@@ -1,6 +1,7 @@
 
 local concat
 
+---@return nil
 local function info()
 
     local path = Astro.Path             local info = require( path .. "info" )
@@ -35,6 +36,8 @@ local function subRequire()
 end
 
 
+---@param path string?
+---@return nil
 return function(path)
 
     Astro = {}          Astro.Path = path or './'           subRequire()

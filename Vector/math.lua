@@ -3,14 +3,20 @@ local astro = Astro.Table                   local safeDivision = Astro.Math.safe
 
 local planeAxes = { 'x', 'y' }              local spaceAxes = { 'x', 'y', 'z' }
 
+---@param a table
+---@return number
 local function normSqr(a)
 
     local b = 0         for i,v in ipairs(spaceAxes) do b = b + a[v] ^ 2 end        return b
 
 end
 
+---@param a table
+---@return number
 local function norm(a) local normSqr = normSqr(a)          return math.sqrt(normSqr) end
 
+---@param a table
+---@return table
 local function copy(a)
 
     local meta = getmetatable(a)        local b = setmetatable( {}, meta )
@@ -19,8 +25,12 @@ local function copy(a)
 
 end
 
+---@param a table
+---@return table
 local function unit(a) return a / norm(a) end
 
+---@param a table
+---@return boolean
 local function isZero(a)
 
     for i,v in ipairs(spaceAxes) do if a[v] ~= 0 then return false end end
@@ -29,10 +39,14 @@ local function isZero(a)
 
 end
 
+---@param a table
+---@return number, number, number
 local function unpack(a) return a.x, a.y, a.z end
 
 -- Get angle from a vector in degrees.
 
+---@param a table
+---@return number
 local function angle(a)
 
     local vector = unit(a)
@@ -45,6 +59,9 @@ end
 
 -- Returns component / Hadamard / element-wise / product and division between vectors.
 
+---@param a table
+---@param b table
+---@return table
 local function componentProduct( a, b )
 
     local c = copy(a)
@@ -53,6 +70,9 @@ local function componentProduct( a, b )
 
 end
 
+---@param a table
+---@param b table
+---@return table
 local function componentDivision( a, b )
     
     local c = copy(a)
@@ -61,12 +81,17 @@ local function componentDivision( a, b )
 
 end
 
+---@param vector table
+---@param key string
+---@return table
 local function componentVector( vector, key ) -- Equivalent to a linear algebra vector projection.
     
     for i,v in ipairs(spaceAxes) do if v ~= key then vector[v] = nil end end            return vector
 
 end
 
+---@param vector table
+---@return table
 local function maxComponent(vector) -- Returns a key-value pair with the key and maximum value of a vector.
 
     local maxKey, maxValue
@@ -81,6 +106,8 @@ local function maxComponent(vector) -- Returns a key-value pair with the key and
 
 end
 
+---@param vector table
+---@return table
 local function minComponent(vector) -- Returns a key-value pair with the key and maximum value of a vector.
 
     local minKey, minValue

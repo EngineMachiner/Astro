@@ -10,6 +10,9 @@ local function onWrite() error(msg) end
 
 local function isFalse(a) return a == false end
 
+---@param tbl table
+---@param recursive boolean?
+---@return table
 local function readOnly( tbl, recursive )
 
     local isReadOnly = tbl.readOnly         if isFalse(isReadOnly) then return tbl end

@@ -1,6 +1,8 @@
 
 -- Gets the smallest power of two number (2^x) that is greater than or equal to the input number 'n'.
 
+---@param n number
+---@return number
 local function nextPowerOfTwo(n) -- For Lua 5.1.
 
     n = math.floor(n) -- Make sure it's an integer.
@@ -11,10 +13,22 @@ local function nextPowerOfTwo(n) -- For Lua 5.1.
 
 end
 
+---@param a number
+---@param b number
+---@return number
 local function safeDivision( a, b ) return b ~= 0 and a / b or 0 end
+
+---@param a number
+---@param b number
+---@return number
 local function safeModulo( a, b ) return b ~= 0 and a % b or 0 end
 
+---@param a number
+---@return boolean
 local function isEven(a) return a % 2 == 0 end
+
+---@param a number
+---@return boolean
 local function isOdd(a) return isEven( a + 1 ) end
 
 return {
