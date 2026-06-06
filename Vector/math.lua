@@ -58,7 +58,7 @@ local function maxComponent(vector) end
 ---@return pair
 local function minComponent(vector) end
 
----@class Vector
+---@class Astro.Vector
 local Vector = {
     planeAxes = planeAxes,
     spaceAxes = spaceAxes,
