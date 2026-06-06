@@ -1,38 +1,43 @@
----@param a table
----@param b table
----@return table
+---@class Vector
+---@field x number
+---@field y number
+---@field z number
+
+---@param a Vector
+---@param b Vector
+---@return Vector
 local function __add(a, b) end
 
----@param a table
----@param b table
----@return table
+---@param a Vector
+---@param b Vector
+---@return Vector
 local function __sub(a, b) end
 
----@param a table|number
----@param b table|number
----@return table
+---@param a Vector|number
+---@param b Vector|number
+---@return Vector
 local function __mul(a, b) end
 
----@param a table|number
----@param b table|number
----@return table
+---@param a Vector|number
+---@param b Vector|number
+---@return Vector
 local function __div(a, b) end
 
----@param a table|number
----@param b table|number
----@return table
+---@param a Vector|number
+---@param b Vector|number
+---@return Vector
 local function __mod(a, b) end
 
----@param a table
----@return table
+---@param a Vector
+---@return Vector
 local function __unm(a) end
 
----@param a table
----@param b table
+---@param a Vector
+---@param b Vector
 ---@return boolean
 local function __eq(a, b) end
 
----@param a table
+---@param a Vector
 ---@return string
 local function __tostring(a) end
 
@@ -41,7 +46,7 @@ local function __tostring(a) end
 local function isVector(a) end
 
 ---@param __index table?
----@return fun(...:any): table
+---@return fun(...:any): Vector
 local function builder(__index) end
 
 local vector = {

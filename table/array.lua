@@ -4,7 +4,6 @@ local function last(tbl) end
 
 ---@param to table
 ---@param from table
----@return nil
 local function add(to, from) end
 
 ---@param a table

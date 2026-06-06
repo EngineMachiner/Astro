@@ -1,5 +1,5 @@
 ---@class AstroConfig
----@field Concat { showID:boolean, showIndex:boolean, wideMode:boolean, indentation:string, keyQuotes:boolean }
+---@field Concat table
 return {
     Concat = {
         showID = false,

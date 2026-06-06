@@ -11,15 +11,15 @@ local function normSqr(a) end
 ---@return number
 local function norm(a) end
 
----@param a table
----@return table
+---@param a Vector
+---@return Vector
 local function copy(a) end
 
----@param a table
----@return table
+---@param a Vector
+---@return Vector
 local function unit(a) end
 
----@param a table
+---@param a Vector
 ---@return boolean
 local function isZero(a) end
 
@@ -31,19 +31,19 @@ local function unpack(a) end
 ---@return number
 local function angle(a) end
 
----@param a table
----@param b table
----@return table
+---@param a Vector
+---@param b Vector
+---@return Vector
 local function componentProduct(a, b) end
 
----@param a table
----@param b table
----@return table
+---@param a Vector
+---@param b Vector
+---@return Vector
 local function componentDivision(a, b) end
 
----@param vector table
+---@param vector Vector
 ---@param key string
----@return table
+---@return Vector
 local function componentVector(vector, key) end
 
 ---@param vector table
