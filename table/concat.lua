@@ -6,7 +6,5 @@ local function concat(...) end
 ---@return string
 local function pack(tbl) end
 
-return {
-    concat = concat,
-    pack = pack,
-}
+---@class Table
+local Table = { concat = concat, pack = pack }

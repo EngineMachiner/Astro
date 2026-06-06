@@ -26,7 +26,8 @@ local function isUserData(a) end
 ---@return boolean
 local function isNil(a) end
 
-return {
+---@class Type
+local Type = {
     isBoolean = isBoolean,
     isNumber = isNumber,
     isString = isString,

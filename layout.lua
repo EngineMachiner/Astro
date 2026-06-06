@@ -14,7 +14,8 @@ local function quantityIn(x, size) end
 ---@return number|Vector
 local function centerOffset(quantityIn) end
 
-return {
+---@class Layout
+local Layout = {
     value = value,
     quantityIn = quantityIn,
     centerOffset = centerOffset,

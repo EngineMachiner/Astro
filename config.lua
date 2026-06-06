@@ -14,13 +14,12 @@
 -- Display table keys between single and double quotes. 
 ---@alias keyQuotes boolean
 
----@class AstroConcatConfig
+---@class ConcatConfig
 ---@field showID showID
 ---@field showIndex showIndex
 ---@field wideMode wideMode
 ---@field indentation indentation
 ---@field keyQuotes keyQuotes
 
----@class AstroConfig
----@field Concat AstroConcatConfig
-return {}
+---@class Config
+---@field Concat ConcatConfig

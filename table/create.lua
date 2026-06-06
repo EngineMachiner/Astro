@@ -2,7 +2,8 @@
 --- A function to create a table that could have the table functions by default.
 --- Be aware that it overrides the __index metamethod.
 ---@param input table
----@return fun(table?:table): table
-return function(input)
-    return function(t) end
-end
+---@return fun( t?:table ): table
+local function create(input) return function(t) end end
+
+---@class Table
+local Table = { create = create }

@@ -21,7 +21,8 @@ local function isEven(a) end
 ---@return boolean
 local function isOdd(a) end
 
-return {
+---@class Math
+local Math = {
     nextPowerOfTwo = nextPowerOfTwo,
     safeDivision = safeDivision,
     safeModulo = safeModulo,

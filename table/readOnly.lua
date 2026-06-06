@@ -3,4 +3,5 @@
 ---@return table
 local function readOnly(tbl, recursive) end
 
-return readOnly
+---@class Table
+local Table = { readOnly = readOnly }

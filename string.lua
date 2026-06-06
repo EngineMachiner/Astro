@@ -29,7 +29,8 @@ local function startsWith(s1, s2) end
 ---@return boolean
 local function endsWith(s1, s2) end
 
-return {
+---@class String
+local String = {
     subChar = subChar,
     first = first,
     last = last,

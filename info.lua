@@ -8,4 +8,3 @@
 ---@class AstroInfo
 ---@field VersionDate VersionDate
 ---@field ID ID
-return {}

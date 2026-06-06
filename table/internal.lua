@@ -5,4 +5,5 @@
 ---@return table
 local function meta(to, from, meta) end
 
-return { meta = meta }
+---@class Table
+local Table = { Internal = { meta = meta } }

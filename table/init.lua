@@ -62,7 +62,11 @@ local function isEmpty(t) end
 ---@return table
 local function tableFactory(input, lib) end
 
-return {
+---@class Table
+---@field Array Array
+---@field Copy Copy
+---@field Meta Meta
+local Table = {
     deepMerge = deepMerge,
     merge = merge,
     keys = keys,

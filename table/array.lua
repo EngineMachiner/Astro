@@ -23,7 +23,8 @@ local function reverse(t) end
 ---@return table
 local function distinct(array, recursive) end
 
-return {
+---@class Array
+local Array = {
     last = last,
     add = add,
     sub = sub,

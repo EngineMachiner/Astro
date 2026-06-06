@@ -3,4 +3,7 @@
 ---@param b table
 ---@param distinct boolean?
 ---@return table
-return function(a, b, distinct) end
+local function intersect(a, b, distinct) end
+
+---@class Table
+local Table = { intersect = intersect }

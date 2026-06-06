@@ -6,7 +6,8 @@ local function shallow(tbl) end
 ---@return table
 local function deep(tbl) end
 
-return {
+---@class Copy
+local Copy = {
     shallow = shallow,
     deep = deep,
 }

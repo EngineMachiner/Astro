@@ -52,9 +52,10 @@ local function isVector(a) end
 ---@return fun(...:any): Vector
 local function builder(__index) end
 
-local vector = {
+---@class Vector
+local Vector = {
     isVector = isVector,
     builder = builder,
 }
 
-return setmetatable(vector, { __call = builder() })
+return setmetatable( Vector, { __call = builder() } )

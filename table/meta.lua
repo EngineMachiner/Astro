@@ -3,4 +3,5 @@
 ---@return table
 local function setIndex(tbl, __index) end
 
-return { setIndex = setIndex }
+---@class Table
+local Table = { setIndex = setIndex }

@@ -1,6 +1,5 @@
----@type string[]
+
 local planeAxes = { 'x', 'y' }
----@type string[]
 local spaceAxes = { 'x', 'y', 'z' }
 
 ---@param a Vector
