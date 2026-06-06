@@ -1,7 +1,6 @@
 
 local concat
 
----@return nil
 local function info()
 
     local path = Astro.Path
