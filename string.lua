@@ -38,7 +38,3 @@ return {
     startsWith = startsWith,
     endsWith = endsWith,
 }
-
----@param s string
----@return table
-function string.Astro(s) end

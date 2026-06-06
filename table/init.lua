@@ -1,3 +1,7 @@
+---@class pair
+---@field key any
+---@field value any
+
 ---@param to table
 ---@param from table
 ---@return table
@@ -8,21 +12,24 @@ local function deepMerge(to, from) end
 ---@return table
 local function merge(to, from) end
 
+-- Returns an array with all the table keys.
 ---@param tbl table
 ---@return table
 local function keys(tbl) end
 
+-- Returns an array with all the table values.
 ---@param tbl table
 ---@return table
 local function values(tbl) end
 
 ---@param tbl table
----@return any
+---@return any random which is a random value in the table.
 local function random(tbl) end
 
+--- Returns a pair table if the value is found.
 ---@param tbl table
----@param x any
----@return table
+---@param x any The x parameter can be the function to compare or the value to search.
+---@return pair
 local function find(tbl, x) end
 
 ---@param tbl table
@@ -37,9 +44,10 @@ local function filter(tbl, x) end
 
 ---@param a table
 ---@param b table
----@return table
+---@return table c table containing values from `a` without entries present in `b`.
 local function sub(a, b) end
 
+-- Returns table minus the first found value.
 ---@param tbl table
 ---@param val any
 ---@return table
@@ -54,7 +62,7 @@ local function isEmpty(t) end
 ---@return table
 local function tableFactory(input, lib) end
 
-local astro = {
+return {
     deepMerge = deepMerge,
     merge = merge,
     keys = keys,
@@ -68,5 +76,3 @@ local astro = {
     isEmpty = isEmpty,
     table = tableFactory,
 }
-
-return astro

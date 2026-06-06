@@ -1,3 +1,4 @@
+-- Returns the next power of two number (2^x) that is greater than or equal to 'n'.
 ---@param n number
 ---@return number
 local function nextPowerOfTwo(n) end

@@ -1,3 +1,4 @@
+-- Internal function which conserves the next table with the former metatable.
 ---@param to table
 ---@param from table
 ---@param meta boolean?

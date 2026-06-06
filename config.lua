@@ -1,11 +1,26 @@
+
+-- Display the table address.
+---@alias showID boolean
+
+-- Display explicit keys with brackets and on array.
+---@alias showIndex boolean
+
+-- Display new lines between tables.
+---@alias wideMode boolean
+
+-- String to display indentation. 
+---@alias indentation string
+
+-- Display table keys between single and double quotes. 
+---@alias keyQuotes boolean
+
+---@class AstroConcatConfig
+---@field showID showID
+---@field showIndex showIndex
+---@field wideMode wideMode
+---@field indentation indentation
+---@field keyQuotes keyQuotes
+
 ---@class AstroConfig
----@field Concat table
-return {
-    Concat = {
-        showID = false,
-        showIndex = true,
-        wideMode = true,
-        indentation = '	',
-        keyQuotes = true,
-    }
-}
+---@field Concat AstroConcatConfig
+return {}

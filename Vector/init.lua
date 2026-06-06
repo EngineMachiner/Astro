@@ -13,21 +13,24 @@ local function __add(a, b) end
 ---@return Vector
 local function __sub(a, b) end
 
----@param a Vector|number
----@param b Vector|number
+-- Scalar multiplication for vectors.
+---@param a number
+---@param b number
 ---@return Vector
 local function __mul(a, b) end
 
----@param a Vector|number
----@param b Vector|number
+-- Scalar division for vectors.
+---@param a number
+---@param b number
 ---@return Vector
 local function __div(a, b) end
 
----@param a Vector|number
----@param b Vector|number
+---@param a number
+---@param b number
 ---@return Vector
 local function __mod(a, b) end
 
+-- Returns vector in opposite direction.
 ---@param a Vector
 ---@return Vector
 local function __unm(a) end

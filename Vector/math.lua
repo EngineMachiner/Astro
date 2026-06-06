@@ -3,11 +3,11 @@ local planeAxes = { 'x', 'y' }
 ---@type string[]
 local spaceAxes = { 'x', 'y', 'z' }
 
----@param a table
+---@param a Vector
 ---@return number
 local function normSqr(a) end
 
----@param a table
+---@param a Vector
 ---@return number
 local function norm(a) end
 
@@ -23,35 +23,40 @@ local function unit(a) end
 ---@return boolean
 local function isZero(a) end
 
----@param a table
+---@param a Vector
 ---@return number, number, number
 local function unpack(a) end
 
----@param a table
----@return number
+---@param a Vector
+---@return number angle
 local function angle(a) end
 
+-- Returns component / Hadamard / element-wise / product between vectors.
 ---@param a Vector
 ---@param b Vector
 ---@return Vector
 local function componentProduct(a, b) end
 
+-- Returns component / Hadamard / element-wise / division between vectors.
 ---@param a Vector
 ---@param b Vector
 ---@return Vector
 local function componentDivision(a, b) end
 
+-- Returns vector equivalent to a linear algebra vector projection.
 ---@param vector Vector
 ---@param key string
 ---@return Vector
 local function componentVector(vector, key) end
 
+-- Returns a `pair` with the key and maximum value of a vector.
 ---@param vector table
----@return table
+---@return pair
 local function maxComponent(vector) end
 
+-- Returns a `pair` with the key and minimum value of a vector.
 ---@param vector table
----@return table
+---@return pair
 local function minComponent(vector) end
 
 return {
