@@ -3,5 +3,5 @@
 ---@return table
 local function readOnly(tbl, recursive) end
 
----@class Table
+---@class Astro.Table
 local Table = { readOnly = readOnly }

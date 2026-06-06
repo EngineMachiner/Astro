@@ -26,7 +26,7 @@ local function isUserData(a) end
 ---@return boolean
 local function isNil(a) end
 
----@class Type
+---@class Astro.Type
 local Type = {
     isBoolean = isBoolean,
     isNumber = isNumber,

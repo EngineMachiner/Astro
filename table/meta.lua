@@ -3,5 +3,5 @@
 ---@return table
 local function setIndex(tbl, __index) end
 
----@class Table
+---@class Astro.Table
 local Table = { setIndex = setIndex }

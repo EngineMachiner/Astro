@@ -21,5 +21,5 @@
 ---@field indentation indentation
 ---@field keyQuotes keyQuotes
 
----@class Config
+---@class Astro.Config
 ---@field Concat ConcatConfig

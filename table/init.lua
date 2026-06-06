@@ -62,7 +62,7 @@ local function isEmpty(t) end
 ---@return table
 local function tableFactory(input, lib) end
 
----@class Table
+---@class Astro.Table
 ---@field Array Array
 ---@field Copy Copy
 ---@field Meta Meta

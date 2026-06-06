@@ -6,5 +6,5 @@ local function concat(...) end
 ---@return string
 local function pack(tbl) end
 
----@class Table
+---@class Astro.Table
 local Table = { concat = concat, pack = pack }

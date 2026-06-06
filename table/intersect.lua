@@ -5,5 +5,5 @@
 ---@return table
 local function intersect(a, b, distinct) end
 
----@class Table
+---@class Astro.Table
 local Table = { intersect = intersect }

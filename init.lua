@@ -1,13 +1,11 @@
 
 ---@class Astro
 ---@field Path string
----@field Config Config
----@field Type Type
----@field Math Math
----@field String String
----@field Table Table
----@field Vector table
----@field Layout Layout
----@field mergeLibs MergeLibs
----@field info fun(): AstroInfo
+---@field Config Astro.Config
+---@field Type Astro.Type
+---@field Math Astro.Math
+---@field String Astro.String
+---@field Table Astro.Table
+---@field Vector Astro.Vector
+---@field Layout Astro.Layout
 Astro = {}

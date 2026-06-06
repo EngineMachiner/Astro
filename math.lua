@@ -21,7 +21,7 @@ local function isEven(a) end
 ---@return boolean
 local function isOdd(a) end
 
----@class Math
+---@class Astro.Math
 local Math = {
     nextPowerOfTwo = nextPowerOfTwo,
     safeDivision = safeDivision,

@@ -8,3 +8,9 @@
 ---@class AstroInfo
 ---@field VersionDate VersionDate
 ---@field ID ID
+
+---@return AstroInfo
+local function info() end
+
+---@class Astro
+local Astro = { info = info }

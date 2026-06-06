@@ -5,5 +5,5 @@
 ---@return fun( t?:table ): table
 local function create(input) return function(t) end end
 
----@class Table
+---@class Astro.Table
 local Table = { create = create }

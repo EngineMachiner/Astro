@@ -5,5 +5,5 @@
 ---@return table
 local function meta(to, from, meta) end
 
----@class Table
+---@class Astro.Table
 local Table = { Internal = { meta = meta } }
