@@ -58,7 +58,8 @@ local function maxComponent(vector) end
 ---@return pair
 local function minComponent(vector) end
 
-return {
+---@class Vector
+local Vector = {
     planeAxes = planeAxes,
     spaceAxes = spaceAxes,
     componentProduct = componentProduct,
