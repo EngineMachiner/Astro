@@ -1,8 +1,3 @@
----@class Astro.Vector
----@field x number
----@field y number
----@field z number
-
 ---@param a Astro.Vector
 ---@param b Astro.Vector
 ---@return Astro.Vector
@@ -48,14 +43,20 @@ local function __tostring(a) end
 ---@return boolean
 local function isVector(a) end
 
+---@class VectorObj
+local VectorObj = {
+    
+    unpack = Astro.Vector.unpack,       copy = Astro.Vector.copy,        tostring = __tostring,
+
+}
+
 ---@param __index table?
----@return fun(...:any): Astro.Vector
+---@return fun(...:any): VectorObj
 local function builder(__index) end
 
 ---@class Astro.Vector
+---@overload fun(...:any): VectorObj
 local Vector = {
     isVector = isVector,
     builder = builder,
 }
-
-return setmetatable( Vector, { __call = builder() } )
